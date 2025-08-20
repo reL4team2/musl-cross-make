@@ -18,8 +18,9 @@ MPC_SITE = $(GNU_SITE)/mpc
 MPFR_SITE = $(GNU_SITE)/mpfr
 ISL_SITE = https://downloads.sourceforge.net/project/libisl/
 
-MUSL_SITE = https://musl.libc.org/releases
-MUSL_REPO = https://git.musl-libc.org/git/musl
+# MUSL_SITE = https://musl.libc.org/releases
+# MUSL_REPO = https://git.musl-libc.org/git/musl
+MUSL_REPO = https://github.com/rel4team2/musl
 
 LINUX_SITE = https://cdn.kernel.org/pub/linux/kernel
 LINUX_HEADERS_SITE = https://ftp.barfooze.de/pub/sabotage/tarballs/
@@ -131,6 +132,9 @@ musl-git-%:
 	touch $@.tmp/$(patsubst %.orig,%,$@)
 	mv $@.tmp/$(patsubst %.orig,%,$@) $@
 	rm -rf $@.tmp
+
+musl-%: 
+	git clone $(MUSL_REPO) $@
 
 %: %.orig
 	case "$@" in */*) exit 1 ;; esac
